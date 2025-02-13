@@ -1,7 +1,9 @@
 ﻿using FluentAssertions;
 using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 using UserRegistry.application.dtos;
 using UserRegistry.application.usecases;
+using UserRegistry.domain.errors;
 using UserRegistry.domain.models;
 using UserRegistry.domain.ports;
 using UserRegistry.domain.vos;
@@ -44,6 +46,21 @@ public class UserRegistrationShould
         _repository.Received().Save(expectedUser);
         _sender.Received().NotifyWelcome(_email);
         registeredUser.Should().Be(expectedUser);
+    }
+
+    [Fact]
+    public void CannotRegisterIfEmailIsBeingUsedByAnotherUser()
+    {
+        _generatorIdentifier.Generate().Returns(Guid.NewGuid());
+        var id = UserId.From(_generatorIdentifier);
+        var expectedUser = new User(id, _email, _password);
+        _repository.Save(expectedUser).Throws(new EmailAlreadyExistsException(PrimitiveEmail));
+        
+        var registerAction = () => _registration.Register(_userRegister);
+
+        registerAction.Should().Throw<EmailAlreadyExistsException>();
+        _repository.Received().Save(expectedUser);
+        _sender.DidNotReceive().NotifyWelcome(_email);
     }
 
 }
