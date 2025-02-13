@@ -12,7 +12,10 @@ public class User(UserId id, Email email, Password password)
 
     protected bool Equals(User other)
     {
-        return _id.Equals(other._id) && _email.Equals(other._email) && _password.Equals(other._password);
+        var haveSameId = _id.Equals(other._id);
+        var haveSameEmail = _email.Equals(other._email);
+        var haveSamePassword = _password.Equals(other._password);
+        return haveSameId && haveSameEmail && haveSamePassword;
     }
 
     public override bool Equals(object? obj)
