@@ -1,6 +1,7 @@
 ﻿using UserRegistry.application.dtos;
 using UserRegistry.domain.models;
 using UserRegistry.domain.ports;
+using UserRegistry.domain.vos;
 
 namespace UserRegistry.application.usecases;
 
@@ -12,6 +13,14 @@ public class UserRegistration (IUserRepository repository, IGeneratorIdentifier 
 
     public User Register(UserRegister userRegister)
     {
-        throw new NotImplementedException();
+        var id = UserId.From(_generatorIdentifier);
+        var email = Email.Of(userRegister.Email);
+        var password = Password.Of(userRegister.Password);
+        var userToRegister = new User(id, email, password);
+        
+        _repository.Save(userToRegister);
+        _sender.NotifyWelcome(email);
+        
+        return userToRegister;
     }
 }
