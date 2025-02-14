@@ -1,4 +1,6 @@
-﻿namespace UserRegistry.domain.vos;
+﻿using UserRegistry.domain.errors;
+
+namespace UserRegistry.domain.vos;
 
 public class Password
 {
@@ -12,6 +14,7 @@ public class Password
     
     public static Password Of(string value)
     {
+        throw new PasswordTooShortException();
         return new Password(value);
     }
     
