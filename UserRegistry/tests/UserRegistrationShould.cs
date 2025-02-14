@@ -27,7 +27,7 @@ public class UserRegistrationShould
     private const string PrimitivePassword = "Valid_Password";
     private readonly Email _email = Email.Of(PrimitiveEmail);
     private readonly Password _password = Password.Of(PrimitivePassword);
-    private readonly UserRegister _userRegister = new(PrimitiveEmail, PrimitivePassword);
+    private readonly UserRegisterRequest _userRegisterRequest = new(PrimitiveEmail, PrimitivePassword);
 
     public UserRegistrationShould()
     {
@@ -41,7 +41,7 @@ public class UserRegistrationShould
         var id = UserId.From(_generatorIdentifier);
         var expectedUser = new User(id, _email, _password);
         
-        var registeredUser = _registration.Register(_userRegister);
+        var registeredUser = _registration.Register(_userRegisterRequest);
 
         _repository.Received().Save(expectedUser);
         _sender.Received().NotifyWelcome(_email);
@@ -56,7 +56,7 @@ public class UserRegistrationShould
         var expectedUser = new User(id, _email, _password);
         _repository.Save(expectedUser).Throws(new EmailAlreadyExistsException(PrimitiveEmail));
         
-        var registerAction = () => _registration.Register(_userRegister);
+        var registerAction = () => _registration.Register(_userRegisterRequest);
 
         registerAction.Should().Throw<EmailAlreadyExistsException>();
         _repository.Received().Save(expectedUser);

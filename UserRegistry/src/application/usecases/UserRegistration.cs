@@ -15,11 +15,11 @@ public class UserRegistration(
     private readonly IGeneratorIdentifier _generatorIdentifier = generatorIdentifier;
     private readonly INotifierSender _sender = sender;
 
-    public User Register(UserRegister userRegister)
+    public User Register(UserRegisterRequest userRegisterRequest)
     {
         var id = UserId.From(_generatorIdentifier);
-        var email = Email.Of(userRegister.Email);
-        var password = Password.Of(userRegister.Password);
+        var email = Email.Of(userRegisterRequest.Email);
+        var password = Password.Of(userRegisterRequest.Password);
         var userToRegister = new User(id, email, password);
 
         try
@@ -28,7 +28,7 @@ public class UserRegistration(
         }
         catch (EmailAlreadyExistsException e)
         {
-            throw new EmailAlreadyExistsException(userRegister.Email);
+            throw new EmailAlreadyExistsException(userRegisterRequest.Email);
         }
 
         _sender.NotifyWelcome(email);

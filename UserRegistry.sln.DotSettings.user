@@ -2,5 +2,6 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e86a20f8_002D1598_002D4e84_002Dbe2f_002D4bfa322e3b5e/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Register" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::80F33AC4-6EA8-4345-B147-490E4605C285::net9.0::UserRegistry.tests.UserRegistrationShould.CannotRegisterIfEmailIsBeingUsedByAnotherUser&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::80F33AC4-6EA8-4345-B147-490E4605C285::net9.0::UserRegistry.tests.PasswordShould.BeValid&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
