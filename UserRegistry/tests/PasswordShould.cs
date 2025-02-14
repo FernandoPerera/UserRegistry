@@ -23,4 +23,14 @@ public class PasswordShould
         function.Should().Throw<PasswordTooShortException>();
     }
 
+    [Fact]
+    public void ItWillNotBeCreatedIfThereIsNoUnderscore()
+    {
+        const string password = "1234567890";
+        
+        var function = () => Password.Of(password);
+        
+        function.Should().Throw<PasswordRequirementsExceptions>();
+    }
+
 }
