@@ -20,7 +20,11 @@ public class Password
             throw new PasswordTooShortException();
         }
 
-        throw new PasswordRequirementsExceptions();
+        if (!value.Contains('_'))
+        {
+            throw new PasswordRequirementsExceptions();
+        }
+        
         return new Password(value);
     }
     
