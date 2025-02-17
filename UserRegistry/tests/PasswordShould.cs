@@ -33,4 +33,14 @@ public class PasswordShould
         function.Should().Throw<PasswordRequirementsExceptions>();
     }
 
+    [Fact]
+    public void ItWillBeCreated()
+    {
+        const string password = "1234567890_";
+
+        var createdPassword = Password.Of(password);
+        
+        createdPassword.Should().BeOfType<Password>();
+    }
+
 }
