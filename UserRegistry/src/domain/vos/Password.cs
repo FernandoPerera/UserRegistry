@@ -4,6 +4,7 @@ namespace UserRegistry.domain.vos;
 
 public class Password
 {
+    private const int MinPasswordLength = 8;
 
     private readonly string _value;
     
@@ -14,7 +15,7 @@ public class Password
     
     public static Password Of(string value)
     {
-        if (value.Length < 8)
+        if (value.Length < MinPasswordLength)
         {
             throw new PasswordTooShortException();
         }
