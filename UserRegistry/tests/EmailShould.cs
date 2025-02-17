@@ -18,4 +18,15 @@ public class EmailShould
 
         function.Should().Throw<InvalidEmailException>();
     }
+
+    [Fact]
+    public void CreateANewEmail()
+    {
+        const string validEmail = "test@example.com";
+        
+        var createdEmail = Email.Of(validEmail);
+        
+        createdEmail.Should().BeOfType<Email>();
+    }
+    
 }
