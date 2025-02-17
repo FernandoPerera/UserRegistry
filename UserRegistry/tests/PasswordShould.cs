@@ -18,7 +18,7 @@ public class PasswordShould
     {
         const string password = "123456_";
         
-        var function = () => Password.Of(password);
+        var function = () => Password.From(password);
 
         function.Should().Throw<PasswordTooShortException>();
     }
@@ -28,7 +28,7 @@ public class PasswordShould
     {
         const string password = "1234567890";
         
-        var function = () => Password.Of(password);
+        var function = () => Password.From(password);
         
         function.Should().Throw<PasswordRequirementsExceptions>();
     }
@@ -38,7 +38,7 @@ public class PasswordShould
     {
         const string password = "1234567890_";
 
-        var createdPassword = Password.Of(password);
+        var createdPassword = Password.From(password);
         
         createdPassword.Should().BeOfType<Password>();
     }

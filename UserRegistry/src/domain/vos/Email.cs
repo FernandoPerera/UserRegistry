@@ -13,7 +13,7 @@ public class Email
         _value = value;
     }
 
-    public static Email Of(string value)
+    public static Email From(string value)
     {
         var isInvalidEmail = !Regex.IsMatch(value, Pattern);
         if (isInvalidEmail)

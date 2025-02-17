@@ -13,7 +13,7 @@ public class Password
         _value = value;
     }
     
-    public static Password Of(string value)
+    public static Password From(string value)
     {
         if (value.Length < MinPasswordLength)
         {

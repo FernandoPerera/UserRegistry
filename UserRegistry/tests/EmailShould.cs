@@ -14,7 +14,7 @@ public class EmailShould
     {
         const string invalidEmail = "@invalid.com";
         
-        var function = () => Email.Of(invalidEmail);
+        var function = () => Email.From(invalidEmail);
 
         function.Should().Throw<InvalidEmailException>();
     }
@@ -24,7 +24,7 @@ public class EmailShould
     {
         const string validEmail = "test@example.com";
         
-        var createdEmail = Email.Of(validEmail);
+        var createdEmail = Email.From(validEmail);
         
         createdEmail.Should().BeOfType<Email>();
     }
