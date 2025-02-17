@@ -1,4 +1,6 @@
-﻿namespace UserRegistry.domain.vos;
+﻿using UserRegistry.domain.errors;
+
+namespace UserRegistry.domain.vos;
 
 public class Email
 {
@@ -12,6 +14,7 @@ public class Email
 
     public static Email Of(string value)
     {
+        throw new InvalidEmailException();
         return new Email(value);
     }
     
