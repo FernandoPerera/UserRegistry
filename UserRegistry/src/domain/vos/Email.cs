@@ -41,4 +41,9 @@ public class Email
     {
         return _value.GetHashCode();
     }
+
+    public override string ToString()
+    {
+        return _value;
+    }
 }

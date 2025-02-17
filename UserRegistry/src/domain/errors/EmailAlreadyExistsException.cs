@@ -1,3 +1,5 @@
-﻿namespace UserRegistry.domain.errors;
+﻿using UserRegistry.domain.vos;
 
-public class EmailAlreadyExistsException(string email) : Exception($"Email {email} already exists.");
+namespace UserRegistry.domain.errors;
+
+public class EmailAlreadyExistsException(Email email) : Exception($"Email {email} already exists.");

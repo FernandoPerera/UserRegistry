@@ -15,19 +15,16 @@ public class UserRegistration(
     public User Register(UserRegisterRequest userRegisterRequest)
     {
         var id = UserId.From(generatorIdentifier);
-        var email = Email.Of(userRegisterRequest.Email);
-        var password = Password.Of(userRegisterRequest.Password);
+        var email = Email.From(userRegisterRequest.Email);
+        var password = Password.From(userRegisterRequest.Password);
         var userToRegister = new User(id, email, password);
 
-        try
+        if (repository.ExistsByEmail(email))
         {
-            repository.Save(userToRegister);
+            throw new EmailAlreadyExistsException(email);
         }
-        catch (EmailAlreadyExistsException e)
-        {
-            throw new EmailAlreadyExistsException(userRegisterRequest.Email);
-        }
-
+        
+        repository.Save(userToRegister);
         sender.NotifyWelcome(email);
 
         return userToRegister;
