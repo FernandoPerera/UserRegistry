@@ -14,7 +14,12 @@ public class Password
     
     public static Password Of(string value)
     {
-        throw new PasswordTooShortException();
+        if (value.Length < 8)
+        {
+            throw new PasswordTooShortException();
+        }
+
+        throw new PasswordRequirementsExceptions();
         return new Password(value);
     }
     
