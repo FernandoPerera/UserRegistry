@@ -9,29 +9,26 @@ namespace UserRegistry.application.usecases;
 public class UserRegistration(
     IUserRepository repository,
     IGeneratorIdentifier generatorIdentifier,
-    INotifierSender sender)
+    INotifierSender sender
+)
 {
-    private readonly IUserRepository _repository = repository;
-    private readonly IGeneratorIdentifier _generatorIdentifier = generatorIdentifier;
-    private readonly INotifierSender _sender = sender;
-
     public User Register(UserRegisterRequest userRegisterRequest)
     {
-        var id = UserId.From(_generatorIdentifier);
+        var id = UserId.From(generatorIdentifier);
         var email = Email.Of(userRegisterRequest.Email);
         var password = Password.Of(userRegisterRequest.Password);
         var userToRegister = new User(id, email, password);
 
         try
         {
-            _repository.Save(userToRegister);
+            repository.Save(userToRegister);
         }
         catch (EmailAlreadyExistsException e)
         {
             throw new EmailAlreadyExistsException(userRegisterRequest.Email);
         }
 
-        _sender.NotifyWelcome(email);
+        sender.NotifyWelcome(email);
 
         return userToRegister;
     }

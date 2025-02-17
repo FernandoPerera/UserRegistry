@@ -6,7 +6,7 @@ namespace UserRegistry.domain.vos;
 public class Email
 {
     private readonly string _value;
-    private const string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+    private const string Pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
 
     private Email(string value)
     {
@@ -15,7 +15,7 @@ public class Email
 
     public static Email Of(string value)
     {
-        var isInvalidEmail = !Regex.IsMatch(value, pattern);
+        var isInvalidEmail = !Regex.IsMatch(value, Pattern);
         if (isInvalidEmail)
         {
             throw new InvalidEmailException();
