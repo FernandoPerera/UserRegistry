@@ -20,14 +20,19 @@ public class Password
             throw new PasswordTooShortException();
         }
 
-        if (!value.Contains('_'))
+        if (DoesNotQualify(value))
         {
             throw new PasswordRequirementsExceptions();
         }
         
         return new Password(value);
     }
-    
+
+    private static bool DoesNotQualify(string value)
+    {
+        return !value.Contains('_');
+    }
+
     protected bool Equals(Password other)
     {
         return _value == other._value;
