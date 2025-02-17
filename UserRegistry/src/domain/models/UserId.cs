@@ -1,6 +1,6 @@
 ﻿using UserRegistry.domain.ports;
 
-namespace UserRegistry.domain.vos;
+namespace UserRegistry.domain.models;
 
 public class UserId
 {

@@ -1,6 +1,4 @@
-﻿using UserRegistry.domain.vos;
-
-namespace UserRegistry.domain.models;
+﻿namespace UserRegistry.domain.models;
 
 public class User(UserId id, Email email, Password password)
 {

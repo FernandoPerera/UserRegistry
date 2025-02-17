@@ -1,6 +1,6 @@
 ﻿using UserRegistry.domain.errors;
 
-namespace UserRegistry.domain.vos;
+namespace UserRegistry.domain.models;
 
 public class Password
 {

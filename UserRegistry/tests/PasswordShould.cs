@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using UserRegistry.domain.errors;
-using UserRegistry.domain.vos;
+using UserRegistry.domain.models;
 
 namespace UserRegistry.tests;
 

@@ -2,7 +2,6 @@
 using UserRegistry.domain.errors;
 using UserRegistry.domain.models;
 using UserRegistry.domain.ports;
-using UserRegistry.domain.vos;
 
 namespace UserRegistry.application.usecases;
 

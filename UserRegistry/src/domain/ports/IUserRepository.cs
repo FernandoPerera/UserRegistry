@@ -1,5 +1,4 @@
 ﻿using UserRegistry.domain.models;
-using UserRegistry.domain.vos;
 
 namespace UserRegistry.domain.ports;
 

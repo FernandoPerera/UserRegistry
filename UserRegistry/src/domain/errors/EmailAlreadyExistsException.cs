@@ -1,4 +1,4 @@
-﻿using UserRegistry.domain.vos;
+﻿using UserRegistry.domain.models;
 
 namespace UserRegistry.domain.errors;
 
