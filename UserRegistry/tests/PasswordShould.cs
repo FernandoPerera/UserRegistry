@@ -14,7 +14,7 @@ public class PasswordShould
     private const int MinimumPasswordLength = 8;
 
     [Fact]
-    public void ItWillNotBeCreatedIfItIsLessThanTheMinimumLength()
+    public void NotBeCreatedIfItIsLessThanTheMinimumLength()
     {
         const string password = "123456_";
         
@@ -24,7 +24,7 @@ public class PasswordShould
     }
 
     [Fact]
-    public void ItWillNotBeCreatedIfThereIsNoUnderscore()
+    public void NotBeCreatedIfThereIsNoUnderscore()
     {
         const string password = "1234567890";
         
@@ -34,7 +34,7 @@ public class PasswordShould
     }
 
     [Fact]
-    public void ItWillBeCreated()
+    public void BeCreated()
     {
         const string password = "1234567890_";
 
