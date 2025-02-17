@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using NSubstitute;
-using NSubstitute.ExceptionExtensions;
 using UserRegistry.application.dtos;
 using UserRegistry.application.usecases;
 using UserRegistry.domain.errors;
@@ -23,11 +22,11 @@ public class UserRegistrationShould
     
     private readonly UserRegistration _registration;
 
-    private const string PrimitiveEmail = "name@example.net";
-    private const string PrimitivePassword = "Valid_Password";
-    private readonly Email _email = Email.Of(PrimitiveEmail);
-    private readonly Password _password = Password.Of(PrimitivePassword);
-    private readonly UserRegisterRequest _userRegisterRequest = new(PrimitiveEmail, PrimitivePassword);
+    private const string GivenEmail = "name@example.net";
+    private const string GivenPassword = "Valid_Password";
+    private readonly Email _email = Email.From(GivenEmail);
+    private readonly Password _password = Password.From(GivenPassword);
+    private readonly UserRegisterRequest _userRegisterRequest = new(GivenEmail, GivenPassword);
 
     public UserRegistrationShould()
     {
@@ -40,6 +39,7 @@ public class UserRegistrationShould
         _generatorIdentifier.Generate().Returns(Guid.NewGuid());
         var id = UserId.From(_generatorIdentifier);
         var expectedUser = new User(id, _email, _password);
+        _repository.ExistsByEmail(_email).Returns(false);
         
         var registeredUser = _registration.Register(_userRegisterRequest);
 
@@ -54,12 +54,12 @@ public class UserRegistrationShould
         _generatorIdentifier.Generate().Returns(Guid.NewGuid());
         var id = UserId.From(_generatorIdentifier);
         var expectedUser = new User(id, _email, _password);
-        _repository.Save(expectedUser).Throws(new EmailAlreadyExistsException(PrimitiveEmail));
+        _repository.ExistsByEmail(_email).Returns(true);
         
         var registerAction = () => _registration.Register(_userRegisterRequest);
 
         registerAction.Should().Throw<EmailAlreadyExistsException>();
-        _repository.Received().Save(expectedUser);
+        _repository.DidNotReceive().Save(expectedUser);
         _sender.DidNotReceive().NotifyWelcome(_email);
     }
 
