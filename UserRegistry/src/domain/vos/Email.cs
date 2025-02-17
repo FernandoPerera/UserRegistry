@@ -1,11 +1,12 @@
-﻿using UserRegistry.domain.errors;
+﻿using System.Text.RegularExpressions;
+using UserRegistry.domain.errors;
 
 namespace UserRegistry.domain.vos;
 
 public class Email
 {
-    
     private readonly string _value;
+    private const string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
 
     private Email(string value)
     {
@@ -14,10 +15,15 @@ public class Email
 
     public static Email Of(string value)
     {
-        throw new InvalidEmailException();
+        var isInvalidEmail = !Regex.IsMatch(value, pattern);
+        if (isInvalidEmail)
+        {
+            throw new InvalidEmailException();
+        }
+
         return new Email(value);
     }
-    
+
     protected bool Equals(Email other)
     {
         return _value == other._value;
